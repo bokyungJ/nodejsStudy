@@ -1,0 +1,320 @@
+모같코 study 0418
+https://learnjs.vlpt.us/basics/01-hello-javascript.html
+
+자바 스크립트에서 자주 사용하는 건 객체랑 array
+
+choco install nodejs-lts
+
+console.log
+
+<1.js>
+변수 선언
+var -> 중복 선언이 됨. 그래서 ES6버전이 나옴-> let(재선언가능), const(상수)
+
+bool
+null(값이 비어있다), undefine(아직 정의되지 않음)
+
+//논리연산자
+null, undefined -> false
+값이있는 1이나 문자열등 -> true
+
+console.log(1 || false) -> 1 출력
+console.log("aaa" && false) -> false &&는 뒤에껄로 보고 출력
+console.log(true && "aaa") -> aaa
+
+front에서 console.log(isLoaded && "로딩중")
+
+console.log(!!"1") -> true, 1이 아닌 true로 출력되길 원할 때 
+
+//비교연산자
+console.log(1 == '1') -> true
+console.log(1 === '1') -> false , 변수의 타입도 비교, 부정을 비교할땐 !==
+
+//ES6문법
+const name="보경"
+console.log(`나의 이름은 ${name}입니다`) -> 백팁(?)
+console.log("나의 이름은 "+ name + "입니다") 이렇게 안해도됨
+backend <== 보경 -> 이런식으로 사용 가능
+
+//삼항연산자
+const isLoaded = false
+console.log(isLoaded ? "로딩중":"화면을 보여줍니다")
+
+//변수 선언
+상수 -> 다대문자
+변수 -> 중간만 대문자
+
+
+<2.js>
+//함수 가장 중요
+function sum(num1, num2) {return num1+num2 }
+이거를 이제 이렇게 하자
+const sum = (num1, num2) => {return num1+num2 }
+=>는 반환을 해준다는 의미이기에 이런 간단한 거는
+const sum = (num1, num2) => num1+num2
+
+//객체 object
+const my = { name : "보경", age = 23}
+console.log(my.name)
+
+const profile = (me) => { console.log(`${me.name}의 나이는 ${me.age}입니다`)}
+profile(my)
+
+이거를 간단하게
+const profile = (me) => { 
+	const {name,age} = me
+	console.log(`${name}의 나이는 ${age}입니다`)}
+더간단
+const profile = ({name,age}) => { 
+	console.log(`${name}의 나이는 ${age}입니다`)}
+
+
+const my = { say: () => {console.log("안녕하세요")}}
+
+//배열
+const array = [1,2,3,4,5]
+
+const objectArray = [
+	{
+	name : "보경",
+	age : 23
+	},
+	{
+	name : "보경2",
+	age : 23
+	}
+]
+
+objectArray.push({name:"보경3", age=23}) ->이런식으로 배열 안에 값 추가 가능
+objectArray.length()
+
+//배열의 내장함수
+- for of 문
+for (let n of number) {}
+
+- for in 문
+for (let key in doggy){
+	console.log(`${key}:${doggy[key]}`)
+}
+
+1. foreach
+const super = ["아이언맨","토르"]
+super.forEach(hero => {console.log(hero)}) -> 안의 파라미터는 함수값
+
+2. map
+const array = [1,2,3,4,5,6,7,8]
+const suare = n =>n*n ->얘는 함수
+const squared = array.map(square) -> foreach랑 비슷 하나씩 들어감
+
+아까 objectArray이용
+const myPro = ({name, age}) => { return age!==23 &&()=>console.log("${name} hi")}
+objectArray.map(({name, age : number})) => age!==23 &&()=>console.log("${name} hi")
+
+3. filter
+걸러주는 역할
+objectArray.filter(n=>n.age!==23) ->23살이 아닌 사람을 새롭게 array를 만들어줘라
+배열로 반환이 됨 따라서 이렇게 하기
+const newArray = objectArray.filter(n=>n.age!==23)
+
+4. indexOf
+index를 찾는 것
+
+아까 super이용
+const index = super.indexOf("토르")
+
+5. find
+값하나를 찾아내는 것
+
+const me = objectArray.find (predicate:my => my.name === "보경")
+
+-> filter는 여러 데이터를 찾을때 이용 (학급이나 반 같이) find는 하나를 찾을때(이름, 키워드)
+
+6. concat
+배열 합치기
+
+const a = []
+const b = []
+const c =a.concat(b)
+
+const c = [...a, ...b] -> ...이 배열을 벗겨줘서 넣는 것
+
+//클래스
+
+const Animal = (type, name, sound) => {
+	this.type = type
+	this.name = name
+	this.sound = sound
+	this.say = () => {
+	console.log(this.sound)
+	}
+}
+
+const dog = new animal("개", "멍멍이", "멍멍")
+dog.say()
+
+위에꺼는 안됨 이렇게 해야됨
+
+function Animal (type, name, sound){
+	this.type = type
+	this.name = name
+	this.sound = sound
+	this.say = () => {
+        console.log(this.sound)
+	}
+}
+
+const dog = new Animal("개", "멍멍이", "멍멍")
+
+dog.say()
+
+//새로운거
+const add = (a,b) => {
+    return a+b
+}
+
+console.log (add( a=1, b=2))
+-> a만 넣어주면 nan값
+
+//새로운 것
+기본 파라미터는 '='으로 설정을 해줘야함
+
+함수 기본 파라미터는 구분을 해주기 위해 사용
+
+const find = (a,b : boolean = false) => {
+    b && console.log(a)
+}
+
+//비구조화할당
+const {name, age} = objectArray[0]
+비구조화 할당 이름 설정
+const myName = ({name, age}) =>{
+	console.log()
+}
+
+myName() ->에러
+
+여기서 기본할당은?
+
+const myName = ({name="보경", age="23"}) =>{
+	console.log(`${name}의 나이는 ${age}이다`)
+}
+
+myName() -> 에러, 원래 되야하는데 나중에 다시 알려줌
+
+//spread, rest
+1. spread -> ...
+
+const slime  = {
+    name : "슬라임"
+}
+
+const cuteSlime = {
+    ...slime,
+    attribute:"cute"
+}
+
+console.log(cuteSlime)
+
+2. rest
+나머지 
+
+const purpleCuteSlime = {
+    name : "슬라임"
+    attribute : "cute"
+    color : "purple"
+}
+
+const {color, ...rest} = purpleCuteSlime
+console.log(color)
+console.log(rest)
+
+//프론트보다 백에서 더 쓸거
+js는 코드가 순서대로 x 동시다발적으로
+console.log('a')
+setTimeout( handler : () =>{
+    console.log("b")
+}, timeout : 1000)
+console.log('c')
+
+- db에서 정보를 받아와서 "정보를 받아왔습니다"를 출력하고싶어!
+옛날에는 callback을 이용 -> 이 함수가 끝난 다음에 이걸 해라 하는 거
+const increaseAndPrint = (n,callback) => {
+    setTimeout( handler : () =>{
+        const increased = n+1
+        console.log(increased)
+        if(callback) {
+            callback(increased)
+        }
+    }, timeout : 1)
+}
+
+increaseAndPrint(n:0, callback:n=>{
+    increaseAndPrint(n, callback:n=>{
+        console.log("끝")
+    })
+})
+
+요즘에는 promise
+resolve : 이 함수가 성공했을때 반환하는 것
+then : resolve가 반환하는 것을 잡는 애, 둘이 짝궁
+reject : 실패, 버리는거
+catch : reject가 버린 걸 잡는애, 둘이 짝궁
+
+const myPromise = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        resolve(1)
+    }, timeout=1000)
+})
+->db를 긁어오는 부분
+myPromise.then(n=>{
+    console.log(`${n}`)
+})
+->긁어온 db를 보여줌
+
+const myPromise = new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+        reject(1)
+    }, timeout=1000)
+})
+myPromise
+    .then(n=>{
+        console.log(`결과 끝 ${n}`)
+    })
+    .catch(n=>console.log("실패 : "+n))
+
+//
+const increaseAndPrint = n=>{
+    return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            const value = n+1
+            if (value === 4 ){
+                const error = new Error()
+                error.name = "ValueIsFiveError"
+                reject(error) -> reject일때는 에러객체를 만들어주자
+                return
+            }
+            console.log(value)
+            resolve(value)
+        }, timeout=1000)
+    })
+}
+
+increaseAndPrint(0)
+.then(n=>{    -> then(increaseAndPrint)라고 해도 똑같음
+    return increaseAndPrint(n)
+})
+.then(n=>{
+    return increaseAndPrint(n)
+})
+.then(n=>{
+    return increaseAndPrint(n)
+})
+.then(n=>{
+    return increaseAndPrint(n)
+})
+.then(n=>{
+    return increaseAndPrint(n)
+})
+.catch(e=>{
+    console.log(e)
+})
