@@ -44,6 +44,14 @@ console.log(isLoaded ? "로딩중":"화면을 보여줍니다")
 상수 -> 다대문자
 변수 -> 중간만 대문자
 
+//새로운거
+const add = (a,b) => {
+    return a+b
+}
+
+console.log (add( a=1, b=2))
+-> a만 넣어주면 nan값
+
 
 <2.js>
 //함수 가장 중요
@@ -71,6 +79,8 @@ const profile = ({name,age}) => {
 
 const my = { say: () => {console.log("안녕하세요")}}
 
+
+<3array.js>
 //배열
 const array = [1,2,3,4,5]
 
@@ -97,6 +107,7 @@ for (let key in doggy){
 	console.log(`${key}:${doggy[key]}`)
 }
 
+<4arrayFunc.js>
 1. foreach
 const super = ["아이언맨","토르"]
 super.forEach(hero => {console.log(hero)}) -> 안의 파라미터는 함수값
@@ -138,8 +149,8 @@ const c =a.concat(b)
 
 const c = [...a, ...b] -> ...이 배열을 벗겨줘서 넣는 것
 
+<5class.js>
 //클래스
-
 const Animal = (type, name, sound) => {
 	this.type = type
 	this.name = name
@@ -167,13 +178,7 @@ const dog = new Animal("개", "멍멍이", "멍멍")
 
 dog.say()
 
-//새로운거
-const add = (a,b) => {
-    return a+b
-}
-
-console.log (add( a=1, b=2))
--> a만 넣어주면 nan값
+<6.js>
 
 //새로운 것
 기본 파라미터는 '='으로 설정을 해줘야함
